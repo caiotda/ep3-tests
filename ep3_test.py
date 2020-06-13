@@ -16,6 +16,8 @@ def main():
             ([((12, None, None), 1, 12)], smallMDP, preEmptyState, 'Pegar', # Espia e o jogo acaba
             'Puxa a última carta do baralho (previamente espiada) e o jogo acaba'),
 
+            ([((18, None, None), 1, 0)], mediumMDP, (13 ,1, (1,1,1)), 'Pegar', 'Jogador passa do limiar quando puxa uma carta específica'),
+
             ([
                 ((2, None, (0,2)), 1/3, 0), #Puxou a carta de valor 1
                 ((6, None, (1,1)), 2/3, 0), #Puxou a carta de valor 5
