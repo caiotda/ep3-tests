@@ -14,7 +14,8 @@ def main():
             ([((5, None, (2, 1)), 1, 0)], smallMDP, (0, 1, (2, 2)), 'Pegar', # Espia e o jogo continua
             'Puxa corretamente a carta espiada'),
             ([((12, None, None), 1, 12)], smallMDP, preEmptyState, 'Pegar', # Espia e o jogo acaba
-            'Puxa a última carta do baralho (previamente espiada) e o jogo acaba'),
+            'Puxa a última carta do baralho e o jogo acaba'),
+            ([((12, None, None), 1, 12)], smallMDP, (11, 0, (1,0)), 'Pegar', 'Espia a última carta e ganha o jogo'),
 
             ([((18, None, None), 1, 0)], mediumMDP, (13 ,1, (1,1,1)), 'Pegar', 'Jogador passa do limiar quando puxa uma carta específica'),
 
@@ -38,11 +39,11 @@ def main():
         for goal, mdp, state, action, suite  in tests:
             test = mdp.succAndProbReward(state, action)
             if goal == test:
+                print('{}: PASS'.format(suite))
                 results += 1
             else:
                 print('{}: FAILED'.format(suite))
                 print('Expected: {}, \nreceived: {}'.format(goal, test))
-            print('{}: PASS'.format(suite))
         print('\nBateria de testes concluida. {}/{} testes aprovados'.format(results, len(tests)))
 
 if __name__ == "__main__":
