@@ -9,7 +9,7 @@ def main():
         print('Começando os testes da Parte 1...\n')
 
 
-        tests = [
+        tests_part1 = [
             ################## Testes de Pegar #######################
             ([((5, None, (2, 1)), 1, 0)], smallMDP, (0, 1, (2, 2)), 'Pegar', # Espia e o jogo continua
             'Puxa corretamente a carta espiada'),
@@ -29,6 +29,7 @@ def main():
                 ((0, 0, (2,2)), 1/2, -1),
                 ((0, 1, (2,2)), 1/2, -1)
             ], smallMDP, (0, None, (2,2)), 'Espiar', 'Retorna as cartas que podem ser espiadas'),
+            ([( (11, 0, (1,0)), 1, -1 )], smallMDP, preEmptyState, 'Espiar', 'Testa o pre empty state'),
             #################### Testes de Sair ######################
             ([
                 ((11, None, None), 1, 11)
@@ -36,7 +37,7 @@ def main():
         ]
 
         results = 0
-        for goal, mdp, state, action, suite  in tests:
+        for goal, mdp, state, action, suite  in tests_part1:
             test = mdp.succAndProbReward(state, action)
             if goal == test:
                 print('{}: PASS'.format(suite))
@@ -44,7 +45,23 @@ def main():
             else:
                 print('{}: FAILED'.format(suite))
                 print('Expected: {}, \nreceived: {}'.format(goal, test))
-        print('\nBateria de testes concluida. {}/{} testes aprovados'.format(results, len(tests)))
+        print('\nBateria de testes da parte 1 concluida. {}/{} testes aprovados'.format(results, len(tests_part1)))
+
+        print('\nFim dos testes da parte 1.\n-------------------')
+""" 
+        tests_part2 = []
+        total_tests = 0
+        alg = ep3.ValueIteration()
+        with Timeout(10):
+            alg.solve(smallMDP)
+        total_tests += 1
+        samePolicy = True
+        for _, val in alg.pi.items():
+            if val=="Espiar":
+                samePolicy = False
+        if samePolicy:
+            test_results +=1
+        print('Início dos testes da parte 2a (Iteração de valores)') """
 
 if __name__ == "__main__":
     main()
