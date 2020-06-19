@@ -47,21 +47,21 @@ def main():
                 print('Expected: {}, \nreceived: {}'.format(goal, test))
         print('\nBateria de testes da parte 1 concluida. {}/{} testes aprovados'.format(results, len(tests_part1)))
 
-        print('\nFim dos testes da parte 1.\n-------------------')
-""" 
-        tests_part2 = []
-        total_tests = 0
-        alg = ep3.ValueIteration()
-        with Timeout(10):
-            alg.solve(smallMDP)
-        total_tests += 1
-        samePolicy = True
-        for _, val in alg.pi.items():
-            if val=="Espiar":
-                samePolicy = False
-        if samePolicy:
-            test_results +=1
-        print('Início dos testes da parte 2a (Iteração de valores)') """
+        print('\nFim dos testes da parte 1.\n-------------------') 
+
+        print('Começando os testes da parte 2.2: MDP xereta\n')
+        results = 0
+        vi = ep3.ValueIteration()
+        mdp = ep3.geraMDPxereta()
+        vi.solve(mdp)
+        f = len([a for a in vi.pi.values() if a == 'Espiar']) /float(len(vi.pi.values()))
+        if f >= 0.1:
+            print("PASS: Sua MDP gera pelo menos 10% de ações 'Espiar'!")
+            results += 1
+        else :
+            print("FAIL: Sua MDP gera {}% de ações espiar, a meta é 10%...".format(100*f))
+        print('Bateria de testes da parte 2.2 concluída. Sua nota foi: {0}/1'.format(results))
+
 
 if __name__ == "__main__":
     main()
